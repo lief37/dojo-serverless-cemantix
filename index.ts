@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.119.0/http/server.ts";
 
 async function handler(_req: Request): Promise<Response> {
     const guess = await extractGuess(_req);
-    const simscore = await getResponse('','');
+    const simscore = await getResponse('chien', guess);
     return new Response(`Here is the simscore ${simscore}`)
 }
 
@@ -14,8 +14,8 @@ function similarity(word1: string, word2:string): string {
 const getResponse = async (word1: string, word2:string) => {
     const body = {
         lang: 'fr',
-        sim1: 'chat',
-        sim2: 'chien',
+        sim1: word1,
+        sim2: word2,
         type: 'General Word2Vec'
     }
 
@@ -24,7 +24,8 @@ const getResponse = async (word1: string, word2:string) => {
             method: "POST", 
             headers:{"Content-Type": "application/json"}, 
             body: JSON.stringify(body) 
-        })).json();
+        }
+    )).json();
     return Number(JSON_response.simscore);
 }
 
