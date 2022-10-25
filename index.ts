@@ -19,7 +19,7 @@ const getResponse = async (word1: string, word2:string) => {
         type: 'General Word2Vec'
     }
 
-    const JSON_response = await (await fetch('http://nlp.polytechnique.fr/similarityscore', { method: "GET", body: JSON.stringify(body) })).json();
+    const JSON_response = await (await fetch('http://nlp.polytechnique.fr/similarityscore', { method: "POST", body: JSON.stringify(body) })).json();
     return JSON.parse(JSON_response).simscore;
 }
 
