@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.119.0/http/server.ts";
-import { get } from 'axios';
+import axios from "axios";
 
 async function handler(_req: Request): Promise<Response> {
     const guess = await extractGuess(_req);
@@ -20,7 +20,7 @@ const getResponse = async (word1: string, word2:string) => {
         type: 'General Word2Vec'
     }
 
-    const JSON_response = await get('http://nlp.polytechnique.fr/similarityscore', JSON.stringify(body));
+    const JSON_response = await axios.get('http://nlp.polytechnique.fr/similarityscore', JSON.stringify(body));
     return JSON.parse(JSON_response).simscore;
 }
 
