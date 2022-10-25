@@ -20,8 +20,7 @@ const getResponse = async (word1: string, word2:string) => {
     }
 
     const JSON_response = await (await fetch('http://nlp.polytechnique.fr/similarityscore', { method: "POST", body: JSON.stringify(body) })).json();
-    console.log(JSON_response);
-    return JSON.parse(JSON_response).simscore;
+    return Number(JSON_response.simscore);
 }
 
 
